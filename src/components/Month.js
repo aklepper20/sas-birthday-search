@@ -17,7 +17,21 @@ export default Month;
 
 const Wrapper = styled.div``;
 const Main = styled.div`
+  padding: 10px;
   display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 15px;
+
+  &:hover {
+    background-color: lightyellow;
+    border-radius: 30px;
+    color: grey;
+    transition: color 100ms ease-out;
+  }
 `;
-const Title = styled.div``;
+const Title = styled.div`
+  font-size: 20px;
+  margin-left: 10px;
+`;
 const Image = styled.img``;
