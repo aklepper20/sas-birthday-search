@@ -7,7 +7,7 @@ function EmployeeCard({ name, birthday, image }) {
     <Wrapper>
       <img src={image} alt={name} />
       <Main>
-        <Name>{name}</Name>
+        <Name> {name.length >= 13 ? name.slice(0, 14) + "..." : name}</Name>
         <SubTitle>{birthday}</SubTitle>
       </Main>
     </Wrapper>

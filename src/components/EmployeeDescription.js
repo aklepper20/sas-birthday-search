@@ -8,11 +8,14 @@ function EmployeeDescription({ employees, selectedEmployee }) {
   useEffect(() => {
     setActiveEmployee(employees[selectedEmployee]);
   }, [employees, selectedEmployee]);
-  console.log(activeEmployee);
-  console.log(selectedEmployee);
+
   return (
     <Wrapper>
-      <Name>{activeEmployee.name}</Name>
+      <Name>
+        {activeEmployee.name.length > 13
+          ? activeEmployee.name.slice(0, 14) + "..."
+          : activeEmployee.name}
+      </Name>
       <Main>
         <img src={activeEmployee.image} alt={activeEmployee.name} />
         <Description>
