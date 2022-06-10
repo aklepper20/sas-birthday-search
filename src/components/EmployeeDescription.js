@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import moment from "moment";
 
 function EmployeeDescription({ employees, selectedEmployee }) {
   const [activeEmployee, setActiveEmployee] = useState(employees[0]);
 
-  const currMoment = moment();
-  // console.log(employees.birthday.format("MMMM Qo, DDDD"));
-
   useEffect(() => {
     setActiveEmployee(employees[selectedEmployee]);
   }, [employees, selectedEmployee]);
-
+  console.log(activeEmployee);
+  console.log(selectedEmployee);
   return (
     <Wrapper>
       <Name>{activeEmployee.name}</Name>

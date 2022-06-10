@@ -8,7 +8,10 @@ function EmployeeList({ employees, setSelectedEmployee }) {
   return (
     <Wrapper>
       {employees?.map((em) => (
-        <div onClick={() => setSelectedEmployee(em.id)} key={em.id}>
+        <div
+          onClick={() => setSelectedEmployee(employees.indexOf(em))}
+          key={em.id}
+        >
           <EmployeeCard
             key={em.id}
             name={em.name}

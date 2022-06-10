@@ -15,7 +15,6 @@ function App() {
   const [selectedEmployee, setSelectedEmployee] = useState(0);
 
   const currMoment = moment();
-  //   console.log(employees.birthday.format("MMMM Qo, DDDD")); empl
 
   const departments = [
     "Technology",
