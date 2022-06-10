@@ -71,7 +71,9 @@ function MonthList() {
   return (
     <Wrapper>
       {monthArr.map((month) => (
-        <Month name={month.name} icon={month.icon} active={month.active} />
+        <div key={month.name}>
+          <Month name={month.name} icon={month.icon} active={month.active} />
+        </div>
       ))}
     </Wrapper>
   );

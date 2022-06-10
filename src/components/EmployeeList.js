@@ -4,21 +4,21 @@ import styled from "styled-components";
 
 import EmployeeCard from "./EmployeeCard";
 
-function EmployeeList({ employees }) {
+function EmployeeList({ employees, setSelectedEmployee }) {
   return (
     <Wrapper>
       {employees?.map((em) => (
-        // <div onClick={() => setSelectedPunk(punk.token_id)}>
-        <EmployeeCard
-          key={em.id}
-          name={em.name}
-          birthday={em.birthday}
-          department={em.department}
-          phone={em.phone}
-          email={em.email}
-          image={em.image}
-        />
-        // </div>
+        <div onClick={() => setSelectedEmployee(em.id)} key={em.id}>
+          <EmployeeCard
+            key={em.id}
+            name={em.name}
+            birthday={em.birthday}
+            department={em.department}
+            phone={em.phone}
+            email={em.email}
+            image={em.image}
+          />
+        </div>
       ))}
     </Wrapper>
   );

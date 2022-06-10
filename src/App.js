@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import db from "./firebase";
 
 import styled from "styled-components";
 import axios from "axios";
+import moment from "moment";
 
 import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
 function App() {
   const [employeesAPI, setEmployeesAPI] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(0);
+
+  const currMoment = moment();
+  //   console.log(employees.birthday.format("MMMM Qo, DDDD")); empl
 
   const departments = [
     "Technology",
@@ -33,7 +39,7 @@ function App() {
       setEmployeesAPI(employeeData.data.results);
     } catch (err) {
       console.log(err);
-      alert(err);
+      // alert(err);
     }
     postEmployees();
   };
@@ -56,18 +62,42 @@ function App() {
     });
   };
 
+  const getFirebaseEmployees = async () => {
+    try {
+      const collectionRef = collection(db, "employees");
+      onSnapshot(collectionRef, (snapshot) => {
+        setEmployees(
+          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+      });
+    } catch (err) {
+      console.log(err);
+      // alert(err);
+    }
+  };
+
   useEffect(() => {
     getEmployees();
   }, []);
 
-  // useEffect(() => {
-  //   postEmployees();
-  // }, []);
+  useEffect(() => {
+    getFirebaseEmployees();
+  }, []);
 
   return (
     <Wrapper>
-      <MonthList />
-      <EmployeeDetails />
+      {employees.length > 0 ? (
+        <>
+          <MonthList employees={employees} />
+          <EmployeeDetails
+            employees={employees}
+            selectedEmployee={selectedEmployee}
+            setSelectedEmployee={setSelectedEmployee}
+          />
+        </>
+      ) : (
+        <h3>There are currently no employees...</h3>
+      )}
     </Wrapper>
   );
 }

@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
+import moment from "moment";
 
-function EmployeeDescription() {
+function EmployeeDescription({ employees, selectedEmployee }) {
+  const [activeEmployee, setActiveEmployee] = useState(employees[0]);
+
+  const currMoment = moment();
+  // console.log(employees.birthday.format("MMMM Qo, DDDD"));
+
+  useEffect(() => {
+    setActiveEmployee(employees[selectedEmployee]);
+  }, [employees, selectedEmployee]);
+
   return (
     <Wrapper>
-      <Name>Jim Jam</Name>
+      <Name>{activeEmployee.name}</Name>
       <Main>
-        <Image></Image>
+        <img src={activeEmployee.image} alt={activeEmployee.name} />
         <Description>
-          <Birthday>June 12th 2000</Birthday>
-          <Department>Technology</Department>
-          <Email>jim@gmail.com</Email>
-          <Phone>(909) 999-9999</Phone>
+          <Birthday>{activeEmployee.birthday}</Birthday>
+          <Department>Department: {activeEmployee.department}</Department>
+          <Email>{activeEmployee.email}</Email>
+          <Phone>phone: {activeEmployee.phone}</Phone>
         </Description>
       </Main>
     </Wrapper>
@@ -27,16 +37,25 @@ const Main = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
+  img {
+    height: 250px;
+    width: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
 `;
-const Image = styled.div`
-  background-image: url("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
-  height: 250px;
-  width: 250px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-`;
+// const Image = styled.div`
+//   background-image: url("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
+//   height: 250px;
+//   width: 250px;
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   border-radius: 50%;
+// `;
 const Description = styled.div`
   padding-right: 20px;
 `;
