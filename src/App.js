@@ -9,7 +9,7 @@ import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
 function App() {
-  const [employees, setEmployees] = useState([]);
+  const [employeesAPI, setEmployeesAPI] = useState([]);
 
   const departments = [
     "Technology",
@@ -30,7 +30,7 @@ function App() {
       const employeeData = await axios.get(
         "https://randomuser.me/api/?results=100"
       );
-      setEmployees(employeeData.data.results);
+      setEmployeesAPI(employeeData.data.results);
     } catch (err) {
       console.log(err);
       alert(err);
@@ -39,9 +39,9 @@ function App() {
   };
 
   const postEmployees = async () => {
-    if (employees.length >= 100) return;
+    if (employeesAPI.length >= 100) return;
 
-    employees.map(async (em) => {
+    employeesAPI.map(async (em) => {
       const collectionRef = collection(db, "employees");
       const payload = {
         name: `${em.name.first} ${em.name.last}`,
