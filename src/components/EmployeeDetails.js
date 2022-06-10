@@ -18,7 +18,8 @@ export default EmployeeDetails;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  flex: 1;
   background: red;
+  margin: 0;
 `;

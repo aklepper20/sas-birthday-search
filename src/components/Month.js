@@ -4,11 +4,9 @@ import { useState } from "react";
 import styled from "styled-components";
 
 function Month({ name, icon, active }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Wrapper>
-      <Main>
+      <Main onClick={() => console.log("hi")}>
         <Image background={icon} backgroundActive={active}></Image>
         <Title>{name}</Title>
       </Main>
