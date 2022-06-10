@@ -92,7 +92,7 @@ function EmployeeList() {
 export default EmployeeList;
 
 const Wrapper = styled.div`
-  flex: 0.8;
+  flex: 1;
   background: skyblue;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;

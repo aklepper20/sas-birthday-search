@@ -21,10 +21,7 @@ function EmployeeDescription() {
 
 export default EmployeeDescription;
 
-const Wrapper = styled.div`
-  flex: 1;
-  /* background: brown; */
-`;
+const Wrapper = styled.div``;
 
 const Main = styled.div`
   display: flex;
