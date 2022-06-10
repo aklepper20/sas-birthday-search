@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { addDoc, collection, doc, writeBatch } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import db from "./firebase";
 
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import EmployeeDetails from "./components/EmployeeDetails";
 
 function App() {
   const [employees, setEmployees] = useState([]);
+
   const departments = [
     "Technology",
     "HR",
@@ -27,29 +28,29 @@ function App() {
   const getEmployees = async () => {
     try {
       const employeeData = await axios.get(
-        "https://randomuser.me/api/?results=200"
+        "https://randomuser.me/api/?results=100"
       );
       setEmployees(employeeData.data.results);
     } catch (err) {
       console.log(err);
       alert(err);
     }
+    postEmployees();
   };
 
-  console.log(employees);
-
   const postEmployees = async () => {
+    if (employees.length >= 100) return;
+
     employees.map(async (em) => {
       const collectionRef = collection(db, "employees");
       const payload = {
         name: `${em.name.first} ${em.name.last}`,
         phone: em.phone,
         email: em.email,
-        image: em.picture.medium,
+        image: em.picture.large,
         birthday: em.dob.date.slice(0, 10),
         birthMonth: parseInt(em.dob.date.slice(6, 7)),
         department: departments[Math.floor(Math.random() * departments.length)],
-        id: parseInt(em.id.value),
       };
       await addDoc(collectionRef, payload);
     });
@@ -59,9 +60,9 @@ function App() {
     getEmployees();
   }, []);
 
-  useEffect(() => {
-    postEmployees();
-  }, []);
+  // useEffect(() => {
+  //   postEmployees();
+  // }, []);
 
   return (
     <Wrapper>
