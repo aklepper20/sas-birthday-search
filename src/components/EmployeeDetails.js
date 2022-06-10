@@ -5,14 +5,20 @@ import styled from "styled-components";
 import EmployeeDescription from "./EmployeeDescription";
 import EmployeeList from "./EmployeeList";
 
-function EmployeeDetails({ employees, setSelectedEmployee, selectedEmployee }) {
+function EmployeeDetails({
+  employees,
+  setSelectedEmployee,
+  selectedEmployee,
+  filteredEmployees,
+}) {
   return (
     <Wrapper>
       <EmployeeDescription
         selectedEmployee={selectedEmployee}
-        employees={employees}
+        filteredEmployees={filteredEmployees}
       />
       <EmployeeList
+        filteredEmployees={filteredEmployees}
         employees={employees}
         setSelectedEmployee={setSelectedEmployee}
       />

@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 import EmployeeCard from "./EmployeeCard";
 
-function EmployeeList({ employees, setSelectedEmployee }) {
+function EmployeeList({ employees, setSelectedEmployee, filteredEmployees }) {
   return (
     <Wrapper>
-      {employees?.map((em) => (
+      {filteredEmployees?.map((em) => (
         <div
-          onClick={() => setSelectedEmployee(employees.indexOf(em))}
+          onClick={() => setSelectedEmployee(filteredEmployees.indexOf(em))}
           key={em.id}
         >
           <EmployeeCard
