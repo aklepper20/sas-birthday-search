@@ -14,7 +14,7 @@ function EmployeeDescription({
   }, [filteredEmployees, selectedEmployee]);
 
   return (
-    <Wrapper>
+    <div>
       <Title>{monthName} Birthdays</Title>
       <Main>
         <img src={activeEmployee.image} alt={activeEmployee.name} />
@@ -35,13 +35,11 @@ function EmployeeDescription({
           </Phone>
         </Description>
       </Main>
-    </Wrapper>
+    </div>
   );
 }
 
 export default EmployeeDescription;
-
-const Wrapper = styled.div``;
 
 const Main = styled.div`
   display: flex;

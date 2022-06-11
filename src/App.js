@@ -52,6 +52,14 @@ function App() {
 
     try {
       employeesAPI.map(async (em) => {
+        let monthNum = em.dob.date;
+        const getMonth = (str) => {
+          return str[5] === "0"
+            ? (str = str.slice(6, 7))
+            : (str = str.slice(5, 7));
+        };
+        let returnedMonth = parseInt(getMonth(monthNum));
+
         const collectionRef = collection(db, "employees");
         const payload = {
           name: `${em.name.first} ${em.name.last}`,
@@ -59,7 +67,7 @@ function App() {
           email: em.email,
           image: em.picture.large,
           birthday: em.dob.date.slice(0, 10),
-          birthMonth: em.dob.date.slice(5, 7),
+          birthMonth: returnedMonth,
           department:
             departments[Math.floor(Math.random() * departments.length)],
         };
@@ -79,55 +87,17 @@ function App() {
       setFilteredEmployees(employeesArr);
 
       const handleFilter = () => {
-        if (filterStatus === 1) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "01")
-          );
-        } else if (filterStatus === 2) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "02")
-          );
-        } else if (filterStatus === 3) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "03")
-          );
-        } else if (filterStatus === 4) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "04")
-          );
-        } else if (filterStatus === 5) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "05")
-          );
-        } else if (filterStatus === 6) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "06")
-          );
-        } else if (filterStatus === 7) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "07")
-          );
-        } else if (filterStatus === 8) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "08")
-          );
-        } else if (filterStatus === 9) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "09")
-          );
-        } else if (filterStatus === 10) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "10")
-          );
-        } else if (filterStatus === 11) {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "11")
-          );
-        } else {
-          setFilteredEmployees(
-            employeesArr.filter((em) => em.birthMonth === "12")
-          );
-        }
+        let statusCount = 1;
+        let monthCount = 1;
+        const arr = [];
+        employeesArr.map((em) => {
+          if (filterStatus === em.birthMonth) {
+            arr.push(em);
+          }
+          statusCount++;
+          monthCount++;
+        });
+        setFilteredEmployees(arr);
       };
       handleFilter();
     });
