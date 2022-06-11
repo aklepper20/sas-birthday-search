@@ -31,10 +31,12 @@ export default EmployeeList;
 
 const Wrapper = styled.div`
   flex: 1;
-  background: skyblue;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top: 1px solid lightgrey;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: scroll;
   flex-wrap: wrap;
   margin-top: 20px;
@@ -42,5 +44,9 @@ const Wrapper = styled.div`
 
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
   }
 `;

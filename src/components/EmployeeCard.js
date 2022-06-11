@@ -18,10 +18,10 @@ export default EmployeeCard;
 
 const Wrapper = styled.div`
   color: white;
-  background-color: orange;
+  background-color: #6c757d;
   border-radius: 20px;
-  width: 200px;
-  height: 300px;
+  width: 230px;
+  height: 310px;
   margin: 15px;
   overflow: hidden;
   img {
@@ -35,7 +35,7 @@ const Main = styled.div`
   align-items: center;
 `;
 const Name = styled.h2`
-  margin-bottom: 0;
+  margin: 0;
 `;
 const SubTitle = styled.p`
   margin: 0;

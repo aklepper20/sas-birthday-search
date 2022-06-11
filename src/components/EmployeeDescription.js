@@ -18,15 +18,21 @@ function EmployeeDescription({
       <Title>{monthName} Birthdays</Title>
       <Main>
         <img src={activeEmployee.image} alt={activeEmployee.name} />
+
         <Description>
           <Name>{activeEmployee.name}</Name>
           <Birthday>
             {monthName} {activeEmployee.birthday.slice(8, 10)},{" "}
             {activeEmployee.birthday.slice(0, 4)}
           </Birthday>
-          <Department>Department: {activeEmployee.department}</Department>
           <Email>{activeEmployee.email}</Email>
-          <Phone>phone: {activeEmployee.phone}</Phone>
+          <Department>
+            <span>Department:</span> {activeEmployee.department}
+          </Department>
+          <Phone>
+            <span>phone: </span>
+            {activeEmployee.phone}
+          </Phone>
         </Description>
       </Main>
     </Wrapper>
@@ -50,6 +56,10 @@ const Main = styled.div`
     background-repeat: no-repeat;
     border-radius: 10%;
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 const Description = styled.div`
   padding-right: 20px;
@@ -60,9 +70,29 @@ const Title = styled.h1`
 const Name = styled.h1`
   margin: 0;
 `;
-const Birthday = styled.h2`
+const Birthday = styled.h3`
   margin: 0;
 `;
-const Department = styled.p``;
-const Email = styled.p``;
-const Phone = styled.p``;
+const Department = styled.p`
+  margin: 0;
+  color: #0b090a;
+  font-size: 20px;
+  span {
+    color: #6c757d;
+    font-size: 14px;
+  }
+`;
+const Email = styled.p`
+  margin-top: 5px;
+  color: #0b090a;
+  font-size: 18px;
+`;
+const Phone = styled.p`
+  margin: 0;
+  color: #0b090a;
+  font-size: 20px;
+  span {
+    color: #6c757d;
+    font-size: 14px;
+  }
+`;

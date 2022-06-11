@@ -103,9 +103,17 @@ function MonthList({ filterStatus, setFilterStatus, monthName, setMonthName }) {
 export default MonthList;
 
 const Wrapper = styled.div`
-  background: yellow;
+  border-right: 1px solid lightgrey;
   flex: 0.3;
   min-width: 200px;
   padding-left: 20px;
   padding-right: 20px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
 `;

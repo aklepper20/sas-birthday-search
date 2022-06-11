@@ -166,11 +166,16 @@ function App() {
 export default App;
 
 const Wrapper = styled.div`
-  background: blue;
-  height: 100vh;
-  width: 100vw;
+  background: #f5f5f5;
+  height: 100%;
+  width: 100%;
   display: flex;
   font-family: "Poppins", sans-serif;
   margin: 0;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;

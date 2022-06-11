@@ -32,6 +32,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background: red;
+
   margin: 0;
 `;

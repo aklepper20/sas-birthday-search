@@ -14,6 +14,7 @@ function Month({
   const [color, setColor] = useState("");
   const [weight, setWeight] = useState("");
   const [fontSize, setFontSize] = useState("");
+
   const handleStatus = (number) => {
     setMonthName(name);
     setFilterStatus(number);
@@ -21,7 +22,7 @@ function Month({
 
   useEffect(() => {
     if (monthName === name) {
-      setColor("red");
+      setColor("#0b090a");
       setWeight("900");
       setFontSize("30px");
     }
@@ -36,7 +37,7 @@ function Month({
           <img
             style={{ height: "26px", marginLeft: "12px" }}
             src="https://img.icons8.com/ios-filled/50/undefined/pin3.png"
-            alt="Active Month"
+            alt="Pinned Month"
           />
         ) : (
           <span></span>
@@ -56,16 +57,22 @@ const Main = styled.div`
   margin: 15px;
 
   &:hover {
-    background-color: lightyellow;
+    background-color: #edf2fb;
     border-radius: 30px;
-    color: grey;
+    color: black;
     width: fit-content;
     transition: color 100ms ease-out;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    padding: 0;
   }
 `;
 const Title = styled.div`
   font-size: 20px;
   margin-left: 10px;
+  color: #495057;
 `;
 const Image = styled.div`
   background-image: ${(props) => `url("${props.background}")`};
@@ -77,5 +84,12 @@ const Image = styled.div`
   ${Wrapper}:hover & {
     background-image: ${(props) => `url("${props.backgroundActive}")`};
     transition: color 100ms ease-out;
+    @media (max-width: 768px) {
+      background-image: none;
+      text-align: center;
+    }
+  }
+  @media (max-width: 768px) {
+    background-image: none;
   }
 `;
