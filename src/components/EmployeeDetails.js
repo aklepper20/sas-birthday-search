@@ -6,7 +6,6 @@ import EmployeeDescription from "./EmployeeDescription";
 import EmployeeList from "./EmployeeList";
 
 function EmployeeDetails({
-  employees,
   setSelectedEmployee,
   selectedEmployee,
   filteredEmployees,
@@ -19,7 +18,6 @@ function EmployeeDetails({
       />
       <EmployeeList
         filteredEmployees={filteredEmployees}
-        employees={employees}
         setSelectedEmployee={setSelectedEmployee}
       />
     </Wrapper>

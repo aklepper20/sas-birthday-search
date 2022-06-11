@@ -13,12 +13,12 @@ const currMonth = moment();
 
 function App() {
   const [employeesAPI, setEmployeesAPI] = useState([]);
-  const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(0);
   const [filterStatus, setFilterStatus] = useState(
     parseInt(currMonth.format("M"))
   );
-  const [filteredEmployees, setFilteredEmployees] = useState(employees);
+  const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
 
   const departments = [
     "Technology",
@@ -70,65 +70,84 @@ function App() {
     }
   };
 
-  const getFirebaseEmployees = async () => {
-    try {
-      const collectionRef = collection(db, "employees");
-      onSnapshot(collectionRef, (snapshot) => {
-        setEmployees(
-          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        );
-      });
-    } catch (err) {
-      console.log(err);
-      alert(err);
-    }
-  };
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
+      let employeesArr = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setFilteredEmployees(employeesArr);
+
+      const handleFilter = () => {
+        if (filterStatus === 1) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "01")
+          );
+        } else if (filterStatus === 2) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "02")
+          );
+        } else if (filterStatus === 3) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "03")
+          );
+        } else if (filterStatus === 4) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "04")
+          );
+        } else if (filterStatus === 5) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "05")
+          );
+        } else if (filterStatus === 6) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "06")
+          );
+        } else if (filterStatus === 7) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "07")
+          );
+        } else if (filterStatus === 8) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "08")
+          );
+        } else if (filterStatus === 9) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "09")
+          );
+        } else if (filterStatus === 10) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "10")
+          );
+        } else if (filterStatus === 11) {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "11")
+          );
+        } else {
+          setFilteredEmployees(
+            employeesArr.filter((em) => em.birthMonth === "12")
+          );
+        }
+      };
+      handleFilter();
+    });
+
+    return unsub;
+  }, [filterStatus]);
 
   useEffect(() => {
     getEmployees();
-    getFirebaseEmployees();
-    const handleFilter = () => {
-      if (filterStatus === 1) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "01"));
-      } else if (filterStatus === 2) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "02"));
-      } else if (filterStatus === 3) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "03"));
-      } else if (filterStatus === 4) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "04"));
-      } else if (filterStatus === 5) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "05"));
-      } else if (filterStatus === 6) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "06"));
-      } else if (filterStatus === 7) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "07"));
-      } else if (filterStatus === 8) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "08"));
-      } else if (filterStatus === 9) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "09"));
-      } else if (filterStatus === 10) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "10"));
-      } else if (filterStatus === 11) {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "11"));
-      } else {
-        setFilteredEmployees(employees.filter((em) => em.birthMonth === "12"));
-      }
-    };
-
-    handleFilter();
-  }, [filterStatus]);
+  }, []);
 
   return (
     <Wrapper>
-      {employees.length > 0 ? (
+      {filteredEmployees.length > 0 ? (
         <>
           <MonthList
-            // employees={employees}
             filterStatus={filterStatus}
             setFilterStatus={setFilterStatus}
           />
           <EmployeeDetails
-            // employees={employees}
             filteredEmployees={filteredEmployees}
             selectedEmployee={selectedEmployee}
             setSelectedEmployee={setSelectedEmployee}

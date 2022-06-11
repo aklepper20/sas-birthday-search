@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import EmployeeCard from "./EmployeeCard";
 
-function EmployeeList({ employees, setSelectedEmployee, filteredEmployees }) {
+function EmployeeList({ setSelectedEmployee, filteredEmployees }) {
   return (
     <Wrapper>
       {filteredEmployees?.map((em) => (

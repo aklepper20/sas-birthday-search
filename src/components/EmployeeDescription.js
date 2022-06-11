@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
-function EmployeeDescription({
-  filteredEmployees,
-  selectedEmployee,
-  employees,
-}) {
+function EmployeeDescription({ filteredEmployees, selectedEmployee }) {
   const [activeEmployee, setActiveEmployee] = useState(filteredEmployees[0]);
 
   useEffect(() => {
@@ -16,17 +12,17 @@ function EmployeeDescription({
   return (
     <Wrapper>
       <Name>
-        {activeEmployee.name.length > 13
-          ? activeEmployee.name.slice(0, 14) + "..."
-          : activeEmployee.name}
+        {activeEmployee?.name.length > 13
+          ? activeEmployee?.name.slice(0, 14) + "..."
+          : activeEmployee?.name}
       </Name>
       <Main>
-        <img src={activeEmployee.image} alt={activeEmployee.name} />
+        <img src={activeEmployee?.image} alt={activeEmployee?.name} />
         <Description>
-          <Birthday>{activeEmployee.birthday}</Birthday>
-          <Department>Department: {activeEmployee.department}</Department>
-          <Email>{activeEmployee.email}</Email>
-          <Phone>phone: {activeEmployee.phone}</Phone>
+          <Birthday>{activeEmployee?.birthday}</Birthday>
+          <Department>Department: {activeEmployee?.department}</Department>
+          <Email>{activeEmployee?.email}</Email>
+          <Phone>phone: {activeEmployee?.phone}</Phone>
         </Description>
       </Main>
     </Wrapper>
