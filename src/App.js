@@ -173,7 +173,7 @@ const Wrapper = styled.div`
   font-family: "Poppins", sans-serif;
   margin: 0;
   box-sizing: border-box;
-
+  overflow: hidden;
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;

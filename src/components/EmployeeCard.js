@@ -24,8 +24,13 @@ const Wrapper = styled.div`
   height: 310px;
   margin: 15px;
   overflow: hidden;
+  transform: scale(1);
+  transition: 0.5s;
   img {
     width: 100%;
+  }
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 

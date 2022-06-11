@@ -37,14 +37,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
   flex-wrap: wrap;
   margin-top: 20px;
   padding-bottom: 20px;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 
   @media (max-width: 768px) {
     justify-content: center;

@@ -55,7 +55,6 @@ const Main = styled.div`
   display: flex;
   align-items: center;
   margin: 15px;
-
   &:hover {
     background-color: #edf2fb;
     border-radius: 30px;
@@ -63,7 +62,6 @@ const Main = styled.div`
     width: fit-content;
     transition: color 100ms ease-out;
   }
-
   @media (max-width: 768px) {
     margin: 0;
     padding: 0;
