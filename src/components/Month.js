@@ -2,14 +2,15 @@ import React from "react";
 
 import styled from "styled-components";
 
-function Month({ name, icon, active, filterStatus, setFilterStatus, number }) {
+function Month({ name, icon, active, setFilterStatus, number, setMonthName }) {
   const handleStatus = (number) => {
-    console.log(filterStatus);
+    setMonthName(name);
     setFilterStatus(number);
   };
+
   return (
     <Wrapper>
-      <Main onClick={() => console.log("hi")}>
+      <Main onClick={() => handleStatus(number)}>
         <Image background={icon} backgroundActive={active}></Image>
         <Title>{name}</Title>
       </Main>

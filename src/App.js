@@ -144,6 +144,8 @@ function App() {
       {filteredEmployees.length > 0 ? (
         <>
           <MonthList
+            setMonthName={setMonthName}
+            monthName={monthName}
             filterStatus={filterStatus}
             setFilterStatus={setFilterStatus}
           />

@@ -79,12 +79,14 @@ const monthArr = [
   },
 ];
 
-function MonthList({ filterStatus, setFilterStatus }) {
+function MonthList({ filterStatus, setFilterStatus, monthName, setMonthName }) {
   return (
     <Wrapper>
       {monthArr.map((month) => (
         <div key={month.name}>
           <Month
+            setMonthName={setMonthName}
+            monthName={monthName}
             name={month.name}
             icon={month.icon}
             active={month.active}
