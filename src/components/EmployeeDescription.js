@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
-function EmployeeDescription({ filteredEmployees, selectedEmployee }) {
+function EmployeeDescription({
+  filteredEmployees,
+  selectedEmployee,
+  monthName,
+}) {
   const [activeEmployee, setActiveEmployee] = useState(filteredEmployees[0]);
 
   useEffect(() => {
@@ -11,18 +15,18 @@ function EmployeeDescription({ filteredEmployees, selectedEmployee }) {
 
   return (
     <Wrapper>
-      <Name>
-        {activeEmployee?.name.length > 13
-          ? activeEmployee?.name.slice(0, 14) + "..."
-          : activeEmployee?.name}
-      </Name>
+      <Title>{monthName} Birthdays</Title>
       <Main>
-        <img src={activeEmployee?.image} alt={activeEmployee?.name} />
+        <img src={activeEmployee.image} alt={activeEmployee.name} />
         <Description>
-          <Birthday>{activeEmployee?.birthday}</Birthday>
-          <Department>Department: {activeEmployee?.department}</Department>
-          <Email>{activeEmployee?.email}</Email>
-          <Phone>phone: {activeEmployee?.phone}</Phone>
+          <Name>{activeEmployee.name}</Name>
+          <Birthday>
+            {monthName} {activeEmployee.birthday.slice(8, 10)},{" "}
+            {activeEmployee.birthday.slice(0, 4)}
+          </Birthday>
+          <Department>Department: {activeEmployee.department}</Department>
+          <Email>{activeEmployee.email}</Email>
+          <Phone>phone: {activeEmployee.phone}</Phone>
         </Description>
       </Main>
     </Wrapper>
@@ -50,10 +54,15 @@ const Main = styled.div`
 const Description = styled.div`
   padding-right: 20px;
 `;
-const Name = styled.h1`
+const Title = styled.h1`
   text-align: center;
 `;
-const Birthday = styled.h2``;
+const Name = styled.h1`
+  margin: 0;
+`;
+const Birthday = styled.h2`
+  margin: 0;
+`;
 const Department = styled.p``;
 const Email = styled.p``;
 const Phone = styled.p``;

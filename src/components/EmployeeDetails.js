@@ -9,12 +9,14 @@ function EmployeeDetails({
   setSelectedEmployee,
   selectedEmployee,
   filteredEmployees,
+  monthName,
 }) {
   return (
     <Wrapper>
       <EmployeeDescription
         selectedEmployee={selectedEmployee}
         filteredEmployees={filteredEmployees}
+        monthName={monthName}
       />
       <EmployeeList
         filteredEmployees={filteredEmployees}

@@ -151,6 +151,7 @@ function App() {
             filteredEmployees={filteredEmployees}
             selectedEmployee={selectedEmployee}
             setSelectedEmployee={setSelectedEmployee}
+            monthName={monthName}
           />
         </>
       ) : (
