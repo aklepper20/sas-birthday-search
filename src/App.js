@@ -87,15 +87,12 @@ function App() {
       setFilteredEmployees(employeesArr);
 
       const handleFilter = () => {
-        let statusCount = 1;
-        let monthCount = 1;
         const arr = [];
+
         employeesArr.map((em) => {
           if (filterStatus === em.birthMonth) {
             arr.push(em);
           }
-          statusCount++;
-          monthCount++;
         });
         setFilteredEmployees(arr);
       };
