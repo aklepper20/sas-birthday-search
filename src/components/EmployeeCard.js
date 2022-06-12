@@ -5,7 +5,15 @@ import styled from "styled-components";
 function EmployeeCard({ name, birthday, image }) {
   return (
     <Wrapper>
-      <img src={image} alt={name} />
+      {image ? (
+        <img src={image} alt={name} />
+      ) : (
+        <img
+          src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+          alt={name}
+        />
+      )}
+
       <Main>
         <Name> {name.length >= 13 ? name.slice(0, 14) + "..." : name}</Name>
         <SubTitle>{birthday}</SubTitle>
