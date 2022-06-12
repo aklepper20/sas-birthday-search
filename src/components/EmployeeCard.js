@@ -13,7 +13,6 @@ function EmployeeCard({ name, birthday, image }) {
           alt={name}
         />
       )}
-
       <Main>
         <Name> {name.length >= 13 ? name.slice(0, 14) + "..." : name}</Name>
         <SubTitle>{birthday}</SubTitle>

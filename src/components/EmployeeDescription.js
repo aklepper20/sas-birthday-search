@@ -17,8 +17,14 @@ function EmployeeDescription({
     <div>
       <Title>{monthName} Birthdays</Title>
       <Main>
-        <img src={activeEmployee.image} alt={activeEmployee.name} />
-
+        {activeEmployee.image ? (
+          <img src={activeEmployee.image} alt={activeEmployee.name} />
+        ) : (
+          <img
+            src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+            alt={activeEmployee.name}
+          />
+        )}
         <Description>
           <Name>{activeEmployee.name}</Name>
           <Birthday>
