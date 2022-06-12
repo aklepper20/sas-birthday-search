@@ -5,9 +5,12 @@ import db from "./firebase";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
+
+import { Circles } from "react-loader-spinner";
 
 const currMonth = moment();
 
@@ -88,7 +91,7 @@ function App() {
           id: doc.id,
         }));
         setFilteredEmployees(employeesArr);
-        setLoading(false);
+        // setLoading(false);
         const handleFilter = () => {
           const arr = [];
           employeesArr.map((em) => {
@@ -128,7 +131,9 @@ function App() {
           />
         </>
       ) : (
-        <h3>Loading...</h3>
+        <Loader>
+          <Circles color="#00BFFF" height={100} width={100} />
+        </Loader>
       )}
     </Wrapper>
   );
@@ -149,4 +154,10 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
   }
+`;
+
+const Loader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
