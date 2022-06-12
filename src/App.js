@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import db from "./firebase";
 
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
+import { Circles } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
-import { Circles } from "react-loader-spinner";
-import mergeSort from "./helpers/mergeSort";
 import departments from "./helpers/departments";
 import getMonth from "./helpers/getMonth";
 import handleFilter from "./helpers/handleFilter";
+import getEmployees from "./helpers/getEmployees";
 
 const currMonth = moment();
 
@@ -27,46 +27,6 @@ function App() {
   const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const getEmployees = async () => {
-    if (employeesAPI?.length >= 100) return;
-
-    try {
-      const employeeData = await axios.get(
-        "https://randomuser.me/api/?results=100"
-      );
-      setEmployeesAPI(employeeData.data.results);
-    } catch (err) {
-      console.log(err);
-      alert(err);
-    }
-    postEmployees();
-  };
-
-  const postEmployees = async () => {
-    try {
-      employeesAPI.map(async (em) => {
-        let monthNum = em.dob.date;
-        let returnedMonth = parseInt(getMonth(monthNum));
-
-        const collectionRef = collection(db, "employees");
-        const payload = {
-          name: `${em.name.first} ${em.name.last}`,
-          phone: em.phone,
-          email: em.email,
-          image: em.picture.large,
-          birthday: em.dob.date.slice(0, 10),
-          day: parseInt(em.dob.date.slice(8, 10)),
-          birthMonth: returnedMonth,
-          department:
-            departments[Math.floor(Math.random() * departments.length)],
-        };
-        await addDoc(collectionRef, payload);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     try {
@@ -86,7 +46,7 @@ function App() {
   }, [filterStatus]);
 
   useEffect(() => {
-    getEmployees();
+    getEmployees(employeesAPI, setEmployeesAPI);
   }, []);
 
   return (

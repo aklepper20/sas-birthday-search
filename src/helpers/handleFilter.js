@@ -8,7 +8,6 @@ const handleFilter = (employeesArr, filterStatus, setFilteredEmployees) => {
     }
   });
   let sortedArr = mergeSort(arr);
-
   setFilteredEmployees(sortedArr);
 };
 
