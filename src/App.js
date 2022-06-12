@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
-import db from "./firebase";
 
 import styled from "styled-components";
-import axios from "axios";
 import moment from "moment";
 import { Circles } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -11,9 +8,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
-import departments from "./helpers/departments";
-import getMonth from "./helpers/getMonth";
-import handleFilter from "./helpers/handleFilter";
+import getFirebaseEmployees from "./helpers/getFirebaseEmployees";
 import getEmployees from "./helpers/getEmployees";
 
 const currMonth = moment();
@@ -29,20 +24,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    try {
-      const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
-        setLoading(true);
-        let employeesArr = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-        }));
-        setFilteredEmployees(employeesArr);
-        setLoading(false);
-        handleFilter(employeesArr, filterStatus, setFilteredEmployees);
-      });
-      return unsub;
-    } catch (err) {
-      console.log(err);
-    }
+    getFirebaseEmployees(setLoading, setFilteredEmployees, filterStatus);
   }, [filterStatus]);
 
   useEffect(() => {
