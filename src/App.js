@@ -91,7 +91,7 @@ function App() {
           id: doc.id,
         }));
         setFilteredEmployees(employeesArr);
-        // setLoading(false);
+        setLoading(false);
         const handleFilter = () => {
           const arr = [];
           employeesArr.map((em) => {
@@ -132,7 +132,7 @@ function App() {
         </>
       ) : (
         <Loader>
-          <Circles color="#00BFFF" height={100} width={100} />
+          <Circles color="#0b090a" height={100} width={100} />
         </Loader>
       )}
     </Wrapper>
@@ -150,6 +150,7 @@ const Wrapper = styled.div`
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
+
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
@@ -157,6 +158,8 @@ const Wrapper = styled.div`
 `;
 
 const Loader = styled.div`
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
