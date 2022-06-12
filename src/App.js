@@ -71,6 +71,7 @@ function App() {
           email: em.email,
           image: em.picture.large,
           birthday: em.dob.date.slice(0, 10),
+          day: parseInt(em.dob.date.slice(8, 10)),
           birthMonth: returnedMonth,
           department:
             departments[Math.floor(Math.random() * departments.length)],
@@ -81,7 +82,7 @@ function App() {
       console.log(err);
     }
   };
-
+  console.log(filteredEmployees);
   useEffect(() => {
     try {
       const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
@@ -108,6 +109,29 @@ function App() {
       console.log(err);
     }
   }, [filterStatus]);
+
+  // useEffect(() => {
+  //   const mergeSort = () => {
+  //     if (filteredEmployees.length <= 1) {
+  //       return filteredEmployees;
+  //     }
+  //     let mid = Math.floor(filteredEmployees.length / 2);
+  //     let left = mergeSort(filteredEmployees.slice(0, mid));
+  //     let right = mergeSort(filteredEmployees.slice(mid));
+  //     return merge(left, right);
+  //   };
+  //   function merge(left, right) {
+  //     let sorted = [];
+  //     while (left.length && right.length) {
+  //       if (left[0].day > right[0].day) {
+  //         sorted.push(right.shift());
+  //       } else {
+  //         sorted.push(left.shift());
+  //       }
+  //     }
+  //     return sorted.concat(left.concat(right));
+  //   }
+  // }, [filterStatus]);
 
   useEffect(() => {
     getEmployees();
