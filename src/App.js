@@ -11,7 +11,10 @@ import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
 import { Circles } from "react-loader-spinner";
-import mergeSort from "./tests/mergeSort";
+import mergeSort from "./helpers/mergeSort";
+import departments from "./helpers/departments";
+import getMonth from "./helpers/getMonth";
+import handleFilter from "./helpers/handleFilter";
 
 const currMonth = moment();
 
@@ -24,20 +27,6 @@ function App() {
   const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const departments = [
-    "Technology",
-    "HR",
-    "Strategy",
-    "Business",
-    "Purchase",
-    "Testing",
-    "Finance",
-    "Operations",
-    "Marketing",
-    "Sales",
-    "General Management",
-  ];
 
   const getEmployees = async () => {
     if (employeesAPI?.length >= 100) return;
@@ -58,11 +47,6 @@ function App() {
     try {
       employeesAPI.map(async (em) => {
         let monthNum = em.dob.date;
-        const getMonth = (str) => {
-          return str[5] === "0"
-            ? (str = str.slice(6, 7))
-            : (str = str.slice(5, 7));
-        };
         let returnedMonth = parseInt(getMonth(monthNum));
 
         const collectionRef = collection(db, "employees");
@@ -84,34 +68,16 @@ function App() {
     }
   };
 
-  const handleMergeSort = () => {
-    let sortedArr = mergeSort(filteredEmployees);
-    setFilteredEmployees(sortedArr);
-  };
-
   useEffect(() => {
     try {
       const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
         setLoading(true);
         let employeesArr = snapshot.docs.map((doc) => ({
           ...doc.data(),
-          id: doc.id,
         }));
         setFilteredEmployees(employeesArr);
-
         setLoading(false);
-        const handleFilter = () => {
-          const arr = [];
-
-          employeesArr.map((em) => {
-            if (filterStatus === em.birthMonth) {
-              arr.push(em);
-            }
-          });
-          let sortedArr = mergeSort(arr);
-          setFilteredEmployees(sortedArr);
-        };
-        handleFilter();
+        handleFilter(employeesArr, filterStatus, setFilteredEmployees);
       });
       return unsub;
     } catch (err) {
