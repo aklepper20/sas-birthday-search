@@ -11,6 +11,7 @@ import MonthList from "./components/MonthList";
 import EmployeeDetails from "./components/EmployeeDetails";
 
 import { Circles } from "react-loader-spinner";
+import mergeSort from "./tests/mergeSort";
 
 const currMonth = moment();
 
@@ -39,6 +40,8 @@ function App() {
   ];
 
   const getEmployees = async () => {
+    if (employeesAPI?.length >= 100) return;
+
     try {
       const employeeData = await axios.get(
         "https://randomuser.me/api/?results=100"
@@ -52,8 +55,6 @@ function App() {
   };
 
   const postEmployees = async () => {
-    if (employeesAPI?.length >= 100) return;
-
     try {
       employeesAPI.map(async (em) => {
         let monthNum = em.dob.date;
@@ -82,7 +83,12 @@ function App() {
       console.log(err);
     }
   };
-  console.log(filteredEmployees);
+
+  const handleMergeSort = () => {
+    let sortedArr = mergeSort(filteredEmployees);
+    setFilteredEmployees(sortedArr);
+  };
+
   useEffect(() => {
     try {
       const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
@@ -92,15 +98,18 @@ function App() {
           id: doc.id,
         }));
         setFilteredEmployees(employeesArr);
+
         setLoading(false);
         const handleFilter = () => {
           const arr = [];
+
           employeesArr.map((em) => {
             if (filterStatus === em.birthMonth) {
               arr.push(em);
             }
           });
-          setFilteredEmployees(arr);
+          let sortedArr = mergeSort(arr);
+          setFilteredEmployees(sortedArr);
         };
         handleFilter();
       });
@@ -109,29 +118,6 @@ function App() {
       console.log(err);
     }
   }, [filterStatus]);
-
-  // useEffect(() => {
-  //   const mergeSort = () => {
-  //     if (filteredEmployees.length <= 1) {
-  //       return filteredEmployees;
-  //     }
-  //     let mid = Math.floor(filteredEmployees.length / 2);
-  //     let left = mergeSort(filteredEmployees.slice(0, mid));
-  //     let right = mergeSort(filteredEmployees.slice(mid));
-  //     return merge(left, right);
-  //   };
-  //   function merge(left, right) {
-  //     let sorted = [];
-  //     while (left.length && right.length) {
-  //       if (left[0].day > right[0].day) {
-  //         sorted.push(right.shift());
-  //       } else {
-  //         sorted.push(left.shift());
-  //       }
-  //     }
-  //     return sorted.concat(left.concat(right));
-  //   }
-  // }, [filterStatus]);
 
   useEffect(() => {
     getEmployees();
