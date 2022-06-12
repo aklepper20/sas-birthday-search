@@ -19,6 +19,7 @@ function App() {
   );
   const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
   const [filteredEmployees, setFilteredEmployees] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const departments = [
     "Technology",
@@ -79,27 +80,30 @@ function App() {
   };
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
-      let employeesArr = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setFilteredEmployees(employeesArr);
-
-      const handleFilter = () => {
-        const arr = [];
-
-        employeesArr.map((em) => {
-          if (filterStatus === em.birthMonth) {
-            arr.push(em);
-          }
-        });
-        setFilteredEmployees(arr);
-      };
-      handleFilter();
-    });
-
-    return unsub;
+    try {
+      const unsub = onSnapshot(collection(db, "employees"), (snapshot) => {
+        setLoading(true);
+        let employeesArr = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setFilteredEmployees(employeesArr);
+        setLoading(false);
+        const handleFilter = () => {
+          const arr = [];
+          employeesArr.map((em) => {
+            if (filterStatus === em.birthMonth) {
+              arr.push(em);
+            }
+          });
+          setFilteredEmployees(arr);
+        };
+        handleFilter();
+      });
+      return unsub;
+    } catch (err) {
+      console.log(err);
+    }
   }, [filterStatus]);
 
   useEffect(() => {
@@ -108,7 +112,7 @@ function App() {
 
   return (
     <Wrapper>
-      {filteredEmployees.length > 0 ? (
+      {!loading && filteredEmployees.length > 0 ? (
         <>
           <MonthList
             setMonthName={setMonthName}
@@ -124,7 +128,7 @@ function App() {
           />
         </>
       ) : (
-        <h3>There are currently no employees...</h3>
+        <h3>Loading...</h3>
       )}
     </Wrapper>
   );
