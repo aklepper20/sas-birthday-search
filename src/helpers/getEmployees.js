@@ -7,12 +7,15 @@ const getEmployees = async (employeesAPI, setEmployeesAPI, postEmployees) => {
     const employeeData = await axios.get(
       "https://randomuser.me/api/?results=100"
     );
+    console.log(employeeData.data.results[0]);
     setEmployeesAPI(employeeData.data.results);
   } catch (err) {
     console.log(err);
     alert(err);
   }
-  postEmployees(employeesAPI);
+  if (employeesAPI) {
+    postEmployees(employeesAPI);
+  }
 };
 
 export default getEmployees;
