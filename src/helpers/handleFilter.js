@@ -7,8 +7,13 @@ const handleFilter = (employeesArr, filterStatus, setFilteredEmployees) => {
       arr.push(em);
     }
   });
-  let sortedArr = mergeSort(arr);
-  setFilteredEmployees(sortedArr);
+
+  if (setFilteredEmployees) {
+    let sortedArr = mergeSort(arr);
+    setFilteredEmployees(sortedArr);
+  } else {
+    return arr;
+  }
 };
 
 export default handleFilter;
