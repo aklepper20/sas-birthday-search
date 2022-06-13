@@ -8,7 +8,7 @@ describe("should correct format its month format", function () {
 
   it("should return 1 for string '2005-01-22T00:13:05.729Z'", function () {
     const output = getMonth("2005-01-22T00:13:05.729Z");
-    expect(output).to.deep.equal("1");
+    expect(output).to.be.eql("1");
   });
 
   it("should return 10 for string '1992-10-08T00:11:05.729Z'", function () {
