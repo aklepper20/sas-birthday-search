@@ -13,6 +13,7 @@ const getFirebaseEmployees = (
       setLoading(true);
       let employeesArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
+        id: doc.id,
       }));
 
       setFilteredEmployees(employeesArr);

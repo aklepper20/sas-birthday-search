@@ -9,6 +9,7 @@ function EmployeeDetails({
   setSelectedEmployee,
   selectedEmployee,
   filteredEmployees,
+  setFilteredEmployees,
   monthName,
 }) {
   return (
@@ -21,6 +22,7 @@ function EmployeeDetails({
       <EmployeeList
         filteredEmployees={filteredEmployees}
         setSelectedEmployee={setSelectedEmployee}
+        setFilteredEmployees={setFilteredEmployees}
       />
     </Wrapper>
   );

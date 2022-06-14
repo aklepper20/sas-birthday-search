@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 import EmployeeCard from "./EmployeeCard";
 
-function EmployeeList({ setSelectedEmployee, filteredEmployees }) {
+function EmployeeList({
+  setSelectedEmployee,
+  filteredEmployees,
+  setFilteredEmployees,
+}) {
   return (
     <Wrapper>
       {filteredEmployees?.map((em) => (
@@ -13,13 +17,15 @@ function EmployeeList({ setSelectedEmployee, filteredEmployees }) {
           key={em.id}
         >
           <EmployeeCard
-            key={em.id}
+            id={em.id}
             name={em.name}
             birthday={em.birthday}
             department={em.department}
             phone={em.phone}
             email={em.email}
             image={em.image}
+            filteredEmployees={filteredEmployees}
+            setFilteredEmployees={setFilteredEmployees}
           />
         </div>
       ))}

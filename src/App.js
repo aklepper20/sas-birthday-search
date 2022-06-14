@@ -42,6 +42,7 @@ function App() {
             setFilterStatus={setFilterStatus}
           />
           <EmployeeDetails
+            setFilteredEmployees={setFilteredEmployees}
             filteredEmployees={filteredEmployees}
             selectedEmployee={selectedEmployee}
             setSelectedEmployee={setSelectedEmployee}

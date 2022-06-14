@@ -1,8 +1,16 @@
 import React from "react";
 
 import styled from "styled-components";
+import handleDelete from "../helpers/handleDelete";
 
-function EmployeeCard({ name, birthday, image }) {
+function EmployeeCard({
+  name,
+  birthday,
+  image,
+  filteredEmployees,
+  id,
+  setFilteredEmployees,
+}) {
   return (
     <Wrapper>
       {image ? (
@@ -15,7 +23,18 @@ function EmployeeCard({ name, birthday, image }) {
       )}
       <Main>
         <Name> {name.length >= 13 ? name.slice(0, 14) + "..." : name}</Name>
+
         <SubTitle>{birthday}</SubTitle>
+        <Delete
+          onClick={() =>
+            handleDelete(id, filteredEmployees, setFilteredEmployees)
+          }
+        >
+          <img
+            src="https://img.icons8.com/ios-glyphs/30/undefined/filled-trash.png"
+            alt={`Delete ${name}`}
+          />
+        </Delete>
       </Main>
     </Wrapper>
   );
@@ -28,7 +47,7 @@ const Wrapper = styled.div`
   background-color: #6c757d;
   border-radius: 20px;
   width: 230px;
-  height: 310px;
+  height: 330px;
   margin: 15px;
   overflow: hidden;
   transform: scale(1);
@@ -51,4 +70,10 @@ const Name = styled.h2`
 `;
 const SubTitle = styled.p`
   margin: 0;
+`;
+
+const Delete = styled.div`
+  width: 25px;
+  align-self: end;
+  padding-right: 5px;
 `;
