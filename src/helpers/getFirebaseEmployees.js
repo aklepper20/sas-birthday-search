@@ -14,7 +14,7 @@ const getFirebaseEmployees = (
       let employeesArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
-      console.log(employeesArr);
+
       setFilteredEmployees(employeesArr);
       setLoading(false);
       handleFilter(employeesArr, filterStatus, setFilteredEmployees);

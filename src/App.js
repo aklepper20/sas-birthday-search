@@ -22,7 +22,7 @@ function App() {
   const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(employeesAPI);
+
   useEffect(() => {
     getFirebaseEmployees(setLoading, setFilteredEmployees, filterStatus);
   }, [filterStatus]);
