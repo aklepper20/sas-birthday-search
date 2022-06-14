@@ -1,9 +1,9 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import db from "../firebase";
 
-const handleDelete = async (id, filteredEmployees, setFilteredEmployees) => {
+const handleDelete = (id, filteredEmployees, setFilteredEmployees) => {
   try {
-    filteredEmployees.forEach((em) => {
+    filteredEmployees.forEach(async (em) => {
       if (em.id === id) {
         await deleteDoc(doc(db, "employees", em.id));
       }

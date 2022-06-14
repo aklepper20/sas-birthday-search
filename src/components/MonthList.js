@@ -30,7 +30,7 @@ export default MonthList;
 const Wrapper = styled.div`
   border-right: 1px solid lightgrey;
   flex: 0.3;
-  min-width: 200px;
+  min-width: 230px;
   padding-left: 20px;
   padding-right: 20px;
 
