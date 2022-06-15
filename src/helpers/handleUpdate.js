@@ -13,7 +13,7 @@ const handleUpdate = (id, inputs, filteredEmployees) => {
           birthday: em.birthday,
           day: em.day,
           birthMonth: em.birthMonth,
-          department: inputs.charAt(0).toUpperCase() + inputs.slice(1),
+          department: inputs.charAt(0).toUpperCase() + inputs.slice(1).trim(),
         });
       }
     });
