@@ -17,6 +17,7 @@ function EmployeeDetails({
       <EmployeeDescription
         selectedEmployee={selectedEmployee}
         filteredEmployees={filteredEmployees}
+        setFilteredEmployees={setFilteredEmployees}
         monthName={monthName}
       />
       <EmployeeList

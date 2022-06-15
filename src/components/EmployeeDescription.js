@@ -33,7 +33,7 @@ function EmployeeDescription({
           </Birthday>
           <Email>{activeEmployee.email}</Email>
           <Department>
-            <span>Department:</span> {activeEmployee.department}
+            <span>Department:</span> <span>{activeEmployee.department}</span>
           </Department>
           <Phone>
             <span>phone: </span>

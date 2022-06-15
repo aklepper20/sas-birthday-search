@@ -30,7 +30,7 @@ function Month({
   return (
     <Wrapper>
       <Main onClick={() => handleStatus(number)}>
-        <Image background={icon}></Image>
+        <Image background={icon} alt={`${monthName} Calender`}></Image>
         <Title style={{ color, fontWeight: weight, fontSize }}>{name}</Title>
         {monthName === name ? (
           <img
@@ -66,7 +66,7 @@ const Main = styled.div`
     padding: 0;
   }
 `;
-const Title = styled.div`
+const Title = styled.h1`
   font-size: 20px;
   margin-left: 10px;
   color: #495057;
@@ -79,7 +79,7 @@ const Image = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   ${Wrapper}:hover & {
-    background-image:  url("https://img.icons8.com/ios-filled/50/undefined/planner.png")};
+    background-image: url("https://img.icons8.com/ios-filled/50/undefined/planner.png");
     transition: color 100ms ease-out;
     @media (max-width: 768px) {
       background-image: none;
