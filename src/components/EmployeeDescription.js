@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
+import UpdateInput from "./UpdateInput";
 
 function EmployeeDescription({
   filteredEmployees,
@@ -8,7 +9,7 @@ function EmployeeDescription({
   monthName,
 }) {
   const [activeEmployee, setActiveEmployee] = useState(filteredEmployees[0]);
-
+  const [updateInput, setUpdateInput] = useState(false);
   useEffect(() => {
     setActiveEmployee(filteredEmployees[selectedEmployee]);
   }, [filteredEmployees, selectedEmployee]);
@@ -33,7 +34,38 @@ function EmployeeDescription({
           </Birthday>
           <Email>{activeEmployee.email}</Email>
           <Department>
-            <span>Department:</span> <span>{activeEmployee.department}</span>
+            {updateInput ? (
+              <UpdateInput
+                setUpdateInput={setUpdateInput}
+                updateInput={updateInput}
+                activeEmployee={activeEmployee}
+                filteredEmployees={filteredEmployees}
+              />
+            ) : (
+              <>
+                <span>Department:</span>{" "}
+                <span
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 500,
+                    color: "#0b090a",
+                  }}
+                >
+                  {activeEmployee.department}
+                </span>
+                <img
+                  onClick={() => setUpdateInput(true)}
+                  style={{
+                    height: "25px",
+                    width: "25px",
+                    paddingLeft: "5px",
+                    cursor: "pointer",
+                  }}
+                  src="https://img.icons8.com/material-outlined/24/undefined/edit--v1.png"
+                  alt="Edit Department"
+                />
+              </>
+            )}
           </Department>
           <Phone>
             <span>phone: </span>
