@@ -12,6 +12,7 @@ function merge(left, right) {
   while (left.length && right.length) {
     if (left[0].day > right[0].day) {
       sorted.push(right.shift());
+      //taking the 1st index of the smaller element and putting it first
     } else {
       sorted.push(left.shift());
     }

@@ -18,7 +18,11 @@ function Month({
     setMonthName(name);
     setFilterStatus(number);
   };
+  //set filter status to filter out what birthmonth (6) we should show, set it to be the number bc its a propertyon month object
+  //set monthName to show correct header on top
+  //but always on refresh the state will reset tothecurrent month we are in
 
+  //this only runs 1x on page load so it keeps the current month styles with no dependecies
   useEffect(() => {
     if (monthName === name) {
       setColor("#0b090a");
@@ -33,6 +37,7 @@ function Month({
         <Image background={icon} alt={`${monthName} Calender`}></Image>
         <Title style={{ color, fontWeight: weight, fontSize }}>{name}</Title>
         {monthName === name ? (
+          //monthName state changes onClick === the name its on pin it
           <img
             style={{ height: "26px", marginLeft: "12px" }}
             src="https://img.icons8.com/ios-filled/50/undefined/pin3.png"

@@ -13,6 +13,7 @@ function EmployeeList({
     <Wrapper>
       {filteredEmployees?.map((em) => (
         <div
+          //first index is set to index 0, each card has their own scope
           onClick={() => setSelectedEmployee(filteredEmployees.indexOf(em))}
           key={em.id}
         >

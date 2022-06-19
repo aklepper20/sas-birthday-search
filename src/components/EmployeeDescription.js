@@ -10,7 +10,10 @@ function EmployeeDescription({
 }) {
   const [activeEmployee, setActiveEmployee] = useState(filteredEmployees[0]);
   const [updateInput, setUpdateInput] = useState(false);
+
   useEffect(() => {
+    //filteredEmployee[whatever index we clicked]
+    //active employee is what is displayed on this component
     setActiveEmployee(filteredEmployees[selectedEmployee]);
   }, [filteredEmployees, selectedEmployee]);
 

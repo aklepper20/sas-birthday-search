@@ -19,12 +19,13 @@ function App() {
   const [filterStatus, setFilterStatus] = useState(
     parseInt(currMonth.format("M"))
   );
+  //6 //filterEmployee.birthmonth === 6, this is used to set the correct birthday
   const [monthName, setMonthName] = useState(currMonth.format("MMMM"));
+  //Takes the current month we are in and displays it as header
   const [filteredEmployees, setFilteredEmployees] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getFirebaseEmployees(setLoading, setFilteredEmployees, filterStatus);
+    getFirebaseEmployees(setFilteredEmployees, filterStatus);
   }, [filterStatus]);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <Wrapper>
-      {!loading && filteredEmployees.length > 0 ? (
+      {filteredEmployees.length > 0 ? (
         <>
           <MonthList
             setMonthName={setMonthName}
